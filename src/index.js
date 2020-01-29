@@ -27,7 +27,7 @@ function fetchDogBreeds(){
 
     let breeds = Object.keys(jsonBreedData.message); //used this line to replace repetitive code in renderDogBreeds and renderBySelectedLetter
     renderDogBreeds(breeds);
-    addEventListenerForBreeds(breeds);
+    filterBreedsByLetter(breeds);
   });
 }
 
@@ -47,7 +47,7 @@ function renderDogBreeds(breeds) {
 
 }
 
-function addEventListenerForBreeds(breeds){
+function filterBreedsByLetter(breeds){
   const dropDownMenu = document.getElementById('breed-dropdown')
   dropDownMenu.addEventListener('change', function(event){
     let letterToFilterBy = event.target.value
