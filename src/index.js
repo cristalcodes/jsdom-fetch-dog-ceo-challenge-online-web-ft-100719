@@ -27,14 +27,12 @@ function fetchDogBreeds(){
 
     let breeds = Object.keys(jsonBreedData.message); //used this line to replace repetitive code in renderDogBreeds and renderBySelectedLetter
     renderDogBreeds(breeds);
+    addEventListenerForBreeds(breeds);
   });
 }
 
 function renderDogBreeds(breeds) {
   const dogBreedsContainer = document.getElementById('dog-breeds')
-  const dropDownMenu = document.getElementById('breed-dropdown')
-  // const breedsHash = jsonBreedData.message
-  // const breeds = Object.keys(breedsHash)
 
   breeds.forEach((breed) => {
     const li = document.createElement('li')
@@ -49,9 +47,28 @@ function renderDogBreeds(breeds) {
 
 }
 
+function addEventListenerForBreeds(breeds){
+  const dropDownMenu = document.getElementById('breed-dropdown')
+  dropDownMenu.addEventListener('change', function(event){
+    let letterToFilterBy = event.target.value
+    let results = breeds.filter(breed => breed.startsWith(letterToFilterBy))
+    let list = document.getElementById('dog-breeds')
+        list.innerText = ""
+
+    results.forEach(result => {
+      const li = document.createElement('li')
+      li.textContent = `${result}`
+      list.appendChild(li)
+    })
+  })
+}
 
 
-///TRASH CODE NOT YET WORKING
+
+///TRASH CODE
+// const breedsHash = jsonBreedData.message
+// const breeds = Object.keys(breedsHash)
+
   // from fetchDogBreeds
     //filterBySelectedLetter(breeds);
   //from renderDogBreeds
